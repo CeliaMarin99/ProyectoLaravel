@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -26,9 +27,15 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        dd($request->all());
+        $request->validate([
+            'title'=> 'required',
+            'description'=> 'required'
+        ]);
+
+        Task::create($request->all());
+        return redirect()->route('tasks.index');
     }
 
     /**
