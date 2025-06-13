@@ -13,7 +13,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return view('index');
+        $tasks = Task::latest()->get(); //añade todas las tareas de la base de datos
+        return view('index', ['tasks' => $tasks]);
     }
 
     /**
