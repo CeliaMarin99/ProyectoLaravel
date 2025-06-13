@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
+
 
 class TaskController extends Controller
 {
@@ -13,7 +15,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::latest()->get(); //añade todas las tareas de la base de datos
+        $tasks = Task::latest()->paginate(3); 
         return view('index', ['tasks' => $tasks]);
     }
 

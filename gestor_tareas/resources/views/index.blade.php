@@ -27,7 +27,7 @@
                 <th>Estado</th>
                 <th>Acción</th>
             </tr>
-                @foreach ($tasks ad $task)
+                @foreach ($tasks as $task)
                     <tr>
                         <td class="fw-bold">{{$task->title}}</td>
                         <td>{{$task->description}}</td>
@@ -47,6 +47,8 @@
                     </tr>
                 @endforeach
         </table>
+
+        {{$tasks->links()}}
     </div>
 </div>
 @endsection
