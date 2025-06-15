@@ -24,7 +24,7 @@ class TaskController extends Controller
      */
     public function create(): View
     {
-        return view('create');
+        return view('create'); //vista para crear nueva tarea
     }
 
     /**
@@ -38,6 +38,7 @@ class TaskController extends Controller
         ]);
 
         Task::create($request->all());
+        //guarda un mensaje temporal
         return redirect()->route('tasks.index')->with('success', 'Nueva tarea creada exitosamente');
     }
 
@@ -62,7 +63,10 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task): RedirectResponse
     {
-        //validacion
+         $request->validate([
+            'title'=> 'required',
+            'description'=> 'required'
+        ]);
         $task->update($request->all());
         return redirect()->route('tasks.index')->with('success', 'Tarea actualizada correctamente');
     }
